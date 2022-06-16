@@ -1,4 +1,5 @@
 import org.apache.spark.sql.{DataFrame, SparkSession}
+import scala.collection.mutable.ListBuffer
 
 class queries(spark:SparkSession) {
   def Q1(): Unit = {
@@ -31,6 +32,7 @@ class queries(spark:SparkSession) {
   }
 
   def Q2(): Unit = {
+    LoadTables()
     val menu = new menu(spark)
     println("Please enter\n" +
       "[1] to see population changes trend line for country\n" +
@@ -51,15 +53,18 @@ class queries(spark:SparkSession) {
         println("Invalid entry, please try again!\n")
         Q2()
     }
+    Q2()
   }
 
   def Q3(): Unit = {
+    LoadTables()
     val menu = new menu(spark)
     //query for any future analysis based on above queries
     menu.mainmenu()
   }
 
   def Q4(): Unit = {
+    LoadTables()
     val menu = new menu(spark)
     println("Please enter\n" +
       "[1] to display fastest growing regions\n" +
@@ -71,37 +76,41 @@ class queries(spark:SparkSession) {
     choice match {
       case "1" =>
       //query for fastest growing regions(top three)
+        Region_Deff()
       case "2" =>
       //query for fastest growing states(top 10)
+        State_Deff()
       case "3" =>
       //query for areas of decreasing population either state wise or region wise(top 10 or 3 respectively)
+      decr_pops()
       case "4" =>
         menu.mainmenu()
       case default =>
         println("Invalid entry, please try again!\n")
         Q4()
     }
+    Q4()
   }
   def LoadTables(): Unit = {
     val df2020: DataFrame = spark.read.format("csv")
       .option("header","false")
       .option("inferSchema", "true")
       .load("output20.csv")
-      .toDF("State_no","Region","State_pop","WO","BO","AIO","AO","NHO","SOR","HL")
+      .toDF("State_no","Region","State_Name","State_pop","WO","BO","AIO","AO","NHO","SOR","HL")
     df2020.createOrReplaceTempView("2020_data")
 
     val df2010: DataFrame = spark.read.format("csv")
       .option("header","false")
       .option("inferSchema", "true")
       .load("output10.csv")
-      .toDF("State_no","Region","State_pop","WO","BO","AIO","AO","NHO","SOR","HL")
+      .toDF("State_no","Region","State_Name","State_pop","WO","BO","AIO","AO","NHO","SOR","HL")
     df2010.createOrReplaceTempView("2010_data")
 
     val df2000: DataFrame = spark.read.format("csv")
       .option("header","false")
       .option("inferSchema", "true")
       .load("output00.csv")
-      .toDF("State_no","Region","State_pop","WO","BO","AIO","AO","NHO","SOR","HL")
+      .toDF("State_no","Region","State_Name","State_pop","WO","BO","AIO","AO","NHO","SOR","HL")
     df2000.createOrReplaceTempView("2000_data")
   }
 
@@ -172,6 +181,109 @@ class queries(spark:SparkSession) {
       println(year)
       Race00.show()
       year = year + 10
+    }
+  }
+
+  def Region_Deff(): Unit = {
+    var year = 2000
+    //var temp = ListBuffer[String]()
+    val temp = scala.collection.mutable.Map[String, Int]()
+    while (year < 2019) {
+      val year10 = year + 10
+      var i = 1
+      while(i<5) {
+        val Deff00_10_1 = spark.sql("Select(select sum(state_pop) from " + year10 + "_data where Region = "+i+")" +
+          "-" +
+          "(select sum(state_pop) from " + year + "_data where Region = "+i+") as 2000_to_2010")
+        var temp1 = Deff00_10_1.select("2000_to_2010").collect().toList.toString()
+        temp += s"${year}_to_${year10}_$i" -> temp1.substring(6, temp1.length - 2).toInt
+        i=i+1
+      }
+      year = year10
+    }
+    var i = 0
+    while(i<3) {
+      val max = temp.valuesIterator.max
+      var key = temp.filter(_._2 == max).toString()
+      val temp1 = key.split(" ")
+      key = temp1(0).substring(8)
+      println(i+1+". Years and Region: "+key+" Difference: "+max)
+      temp.remove(key)
+      i=i+1
+    }
+  }
+
+  def State_Deff(): Unit = {
+    var year = 2000
+    //var temp = ListBuffer[String]()
+    val temp = scala.collection.mutable.Map[String, Int]()
+    while (year < 2019) {
+      val year10 = year + 10
+      var i = 1
+      while(i<77) {
+        val Deff00_10_1 = spark.sql("Select(select state_pop from " + year10 + "_data where State_no = "+i+")" +
+                                            "-" +
+                                            "(select state_pop from " + year + "_data where State_no = "+i+") as 2000_to_2010")
+        var temp1 = Deff00_10_1.select("2000_to_2010").collect().toList.toString()
+        val temp2 = temp1.substring(6,temp1.length-2)
+        if(temp2.equals("null")){
+     //     println("No state with that number")
+        }else {
+          var Name = spark.sql("Select State_Name from "+year+"_data where State_no = "+i)
+          temp1 = Name.select("State_Name").collect().toList.toString()
+          val SName = temp1.substring(6,temp1.length-2)
+          temp += s"${year}_to_${year10}_$SName" -> temp2.toInt
+        }
+        i=i+1
+      }
+      year = year10
+    }
+    var i = 0
+    while(i<10) {
+      val max = temp.valuesIterator.max
+      var key = temp.filter(_._2 == max).toString()
+      val temp1 = key.split(" ")
+      key = temp1(0).substring(8)
+      println(i+1+".\tYears and State: "+key+"\tDifference: "+max)
+      temp.remove(key)
+      i=i+1
+    }
+  }
+
+  def decr_pops(): Unit = {
+    var year = 2000
+    //var temp = ListBuffer[String]()
+    val temp = scala.collection.mutable.Map[String, Int]()
+    while (year < 2019) {
+      val year10 = year + 10
+      var i = 1
+      while(i<77) {
+        val Deff00_10_1 = spark.sql("Select(select state_pop from " + year10 + "_data where State_no = "+i+")" +
+          "-" +
+          "(select state_pop from " + year + "_data where State_no = "+i+") as 2000_to_2010")
+        var temp1 = Deff00_10_1.select("2000_to_2010").collect().toList.toString()
+        val temp2 = temp1.substring(6,temp1.length-2)
+        if(temp2.equals("null")){
+          //     println("No state with that number")
+        }else if(temp2.toInt < 0) {
+          var Name = spark.sql("Select State_Name from "+year+"_data where State_no = "+i)
+          temp1 = Name.select("State_Name").collect().toList.toString()
+          val SName = temp1.substring(6,temp1.length-2)
+          temp += s"${year}_to_${year10}_$SName" -> temp2.toInt
+        }
+        i=i+1
+      }
+      year = year10
+    }
+    var i = 0
+    while(i<6) {
+      val max = temp.valuesIterator.min
+      var key = temp.filter(_._2 == max).toString()
+      val temp1 = key.split(" ")
+      key = temp1(0).substring(8)
+      println(i+1+".\tYears and State: "+key+"\tDifference: "+max)
+      temp.remove(key)
+      i=i+1
     }
   }
 }
