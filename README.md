@@ -12,7 +12,7 @@ $ Link to STARTUP.md
 $ Notable items/things to pay attention to
 
 The data for each census year has been cleaned, queried to relevant information, and outputted as .csv files. These files are included as part of this repository as [output00.csv](https://github.com/Revature-Big-Data-Capstone-1348/Project-3/blob/main/output00.csv), 
-[output10.csv](https://github.com/Revature-Big-Data-Capstone-1348/Project-3/blob/main/output10.csv), and [output20.csv](https://github.com/Revature-Big-Data-Capstone-1348/Project-3/blob/main/output20.csv). Steps taken to replicate our cleaning process may be found in the [add_docs folder](https://github.com/Revature-Big-Data-Capstone-1348/Project-3/tree/main/add_docs).
+[output10.csv](https://github.com/Revature-Big-Data-Capstone-1348/Project-3/blob/main/output10.csv), and [output20.csv](https://github.com/Revature-Big-Data-Capstone-1348/Project-3/blob/main/output20.csv). Steps taken to replicate our cleaning process may be found in the [Wiki](https://github.com/Revature-Big-Data-Capstone-1348/Project-3/wiki).
 
 ### Software Requirements:
 - Scala 2.13.8
