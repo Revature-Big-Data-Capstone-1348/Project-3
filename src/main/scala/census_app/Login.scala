@@ -9,6 +9,14 @@ class Login() {
   val databaseManager = new DatabaseManager()
 
 
+/*  What do these methods do...
+ def createLoginTable(): Unit = {
+ def login(): Unit = {
+ def insert(): Unit = {
+
+ It seems like we're using everything starting from val globallogindata.
+ But someone from the app team will probably be able to speak more to that.*/
+
   def createLoginTable(): Unit = {
     val loginDB = databaseManager.spark.read.options(Map("inferSchema" -> "true", "header" -> "true"))
       .csv("src/input/logintable")

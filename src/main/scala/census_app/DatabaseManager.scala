@@ -4,8 +4,10 @@ import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.{DataFrame, SparkSession}
 import org.apache.spark.sql.types._
+
 import java.io.{File, PrintWriter}
 import scala.collection.mutable.ArrayBuffer
+import scala.io.StdIn.readChar
 
 class DatabaseManager {
   //utilize winutils.exe for running Hadoop on Windows
@@ -78,10 +80,10 @@ class DatabaseManager {
     case "Q1_1" => dataAnalysis.Total_Pops(spark:SparkSession)
     case "Q1_2" => dataAnalysis.Region_Pops(spark:SparkSession)
     case "Q1_3" => dataAnalysis.Race_Pops(spark:SparkSession)
-    //case "Q2_1" => dataAnalysis.query4(spark:SparkSession)
-    //case "Q2_2" => dataAnalysis.query5(spark:SparkSession)
-    //case "Q3_1" => dataAnalysis.query6(spark:SparkSession)
-    //case "Q3_2" => dataAnalysis.query7(spark:SparkSession)
+    case "Q2_1" => dataAnalysis.total_predict_2020(spark:SparkSession)
+    case "Q2_2" => dataAnalysis.state_predict_2020(spark:SparkSession)
+    case "Q3_1" => dataAnalysis.total_future(spark:SparkSession)
+    case "Q3_2" => dataAnalysis.state_future(spark:SparkSession)
     case "Q4_1" => dataAnalysis.Region_Deff(spark:SparkSession)
     case "Q4_2" => dataAnalysis.State_Deff(spark:SparkSession)
     case "Q4_3" => dataAnalysis.decr_pops(spark:SparkSession)
