@@ -48,7 +48,7 @@ $ List of known issues
 - Tayon Williams
 
 ## License
-$ License
+[MIT License](https://github.com/Revature-Big-Data-Capstone-1348/Project-3/blob/main/LICENSE.md)
 
 ## Contact
 For more information, please contact $contact info.
