@@ -7,9 +7,8 @@ Using a sample dataset of approximately 60 million rows, taken from publicly ava
 the data to determine information on a variety of subjects regarding total population and racial distribution. Information from these queries is then visualized using Tableau.
 
 ## Getting Started
+Please refer to the STARTUP.md guide.
 $ Link to STARTUP.md
-
-$ Notable items/things to pay attention to
 
 The data for each census year has been cleaned, queried to relevant information, and outputted as .csv files. These files are included as part of this repository as [output00.csv](https://github.com/Revature-Big-Data-Capstone-1348/Project-3/blob/main/output00.csv), 
 [output10.csv](https://github.com/Revature-Big-Data-Capstone-1348/Project-3/blob/main/output10.csv), and [output20.csv](https://github.com/Revature-Big-Data-Capstone-1348/Project-3/blob/main/output20.csv). Steps taken to replicate our cleaning process may be found in the [Wiki](https://github.com/Revature-Big-Data-Capstone-1348/Project-3/wiki).
@@ -48,7 +47,7 @@ $ List of known issues
 - Tayon Williams
 
 ## License
-$ License
+[MIT License](https://github.com/Revature-Big-Data-Capstone-1348/Project-3/blob/main/LICENSE.md)
 
 ## Contact
-For more information, please contact $contact info.
+For more information, please contact Erienne McCray at erienne793@revature.net.
