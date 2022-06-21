@@ -51,4 +51,4 @@ $ List of known issues
 [MIT License](https://github.com/Revature-Big-Data-Capstone-1348/Project-3/blob/main/LICENSE.md)
 
 ## Contact
-For more information, please contact $contact info.
+For more information, please contact Erienne McCray at [erienne793@revature.net].
