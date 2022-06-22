@@ -2,6 +2,8 @@ package census_app
 
 import org.apache.spark.sql.{DataFrame, SparkSession}
 
+import scala.io.StdIn.readChar
+
 class DatabaseManager {
   //utilize winutils.exe for running Hadoop on Windows
   System.setProperty("%HADOOP_HOME%", "C://Hadoop//bin")

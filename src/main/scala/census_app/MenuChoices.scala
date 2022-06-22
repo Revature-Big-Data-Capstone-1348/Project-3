@@ -4,7 +4,7 @@ import org.apache.spark.sql.{DataFrame, SparkSession}
 import org.apache.spark.sql.types._
 import org.apache.spark.sql.SparkSession
 
-import scala.collection.JavaConversions._
+//import scala.collection.JavaConversions._
 
 object MenuChoices {
 
