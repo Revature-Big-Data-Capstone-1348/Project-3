@@ -28,7 +28,7 @@ Here you will find everything you need to get started with this application.
     - Azure Blob Storage
     - Azure Pipeline
 
-#### If using Web-Scraping Techniques (work with Justin specifically) 
+#### If using Web-Scraping Techniques 
 - Ubuntu (version 20.04 LTS, download: https://ubuntu.com/download/desktop)
 
 #### If using Census.gov recommended cleaning steps
