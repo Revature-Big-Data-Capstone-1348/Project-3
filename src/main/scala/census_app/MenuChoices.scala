@@ -9,10 +9,10 @@ import org.apache.spark.sql.SparkSession
 object MenuChoices {
 
   val databaseManager = new DatabaseManager()
-  val login = new Login() // instantiate new login class
-
+  val login = new Login()
 
   def login_menu(): Unit = {
+    //val loginmain = new loginmain(spark)
     println("\n----Welcome to the Census Bureau Analysis----\n" +
             "[1] Login with an Existing Account\n" +
             "[2] Create a New User Account\n" +
@@ -23,18 +23,17 @@ object MenuChoices {
     var choice = scala.io.StdIn.readLine()
     choice match {
       case "1" =>
-        login.login_2 //login class > login_2 method
+        login.login_2
       case "2" =>
-        login.create //login class > create method
+        login.create
       case "3" =>
-        main_menu() //references main_menu method, below
+        main_menu()
       case "0" =>
         println("Thank you for using the application!")
         sys.exit()
       case default =>
         println("Invalid input, please try again.\n")
         login_menu()
-//
     }
   }
 
@@ -49,7 +48,6 @@ object MenuChoices {
             "---------------------------------------------")
     println("\nPlease select from one of the following options: ")
     var choice = scala.io.StdIn.readLine()
-    // Q1 - Q4 are submenus, below
     choice match {
       case "1" =>
         Q1()
@@ -83,21 +81,18 @@ object MenuChoices {
       case "1" =>
         println("\n**************************************************")
         //query for total population of country
-        //databaseManager class > queries method > case Q1_1 calls DataAnalysis class > Total_Pops method
         databaseManager.queries(queryNumber = "Q1_1")
         databaseManager.pause(1000)
         Q1()
       case "2" =>
         println("\n**************************************************")
       //query for region with highest population
-        //databaseManage class > queries method > case Q1_2 calls DataAnalysis class > Region_Pops method
         databaseManager.queries(queryNumber = "Q1_2")
         databaseManager.pause(1000)
         Q1()
       case "3" =>
         println("\n**************************************************")
       //query for population of different race/ethnicities
-        //databaseManage class > queries method > case Q1_3 calls DataAnalysis class > Race_Pops method
         databaseManager.queries(queryNumber = "Q1_3")
         databaseManager.pause(1000)
         Q1()
@@ -121,15 +116,12 @@ println("\nPlease select from one of the following options: ")
       case "1" =>
         println("\n**************************************************")
       //query for trend line of population changes for country
-        // databaseManager class > queries method > case Q2_1 calls DataAnalysis class > total_predict_2020 method
         databaseManager.queries(queryNumber = "Q2_1")
         databaseManager.pause(1000)
         Q2()
       case "2" =>
         println("\n**************************************************")
-        val state_in = scala.io.StdIn.readLine()
       //query for trend line of population changes for state of choice
-        //databaseManager class > queries method > case Q2_2 calls DataAnalysis class > state_predict_2020 method
         databaseManager.queries(queryNumber = "Q2_2")
         databaseManager.pause(1000)
         Q2()
@@ -153,14 +145,14 @@ println("\nPlease select from one of the following options: ")
       case "1" =>
         println("\n**************************************************")
         //query for trend line of population changes for country
-        //databaseManager class > queries method > case Q3_1 calls DataAnalysis class > total_future method
         databaseManager.queries(queryNumber = "Q3_1")
         databaseManager.pause(1000)
         Q3()
       case "2" =>
         println("\n**************************************************")
+        print("Please enter state of choice: ")
+        val state_in = scala.io.StdIn.readLine()
         //query for trend line of population changes for state of choice
-        //databaseManager class > queries method > case Q3_2 calls DataAnalysis class > state_future method
         databaseManager.queries(queryNumber = "Q3_2")
         databaseManager.pause(1000)
         Q3()
@@ -185,21 +177,18 @@ println("\nPlease select from one of the following options: ")
       case "1" =>
       println("\n**************************************************")
       //query for fastest growing regions(top three)
-        //databaseManager class > queries method > case Q4_1 calls DataAnalysis class > Region_Deff method
       databaseManager.queries(queryNumber="Q4_1")
       databaseManager.pause(1000)
       Q4()
       case "2" =>
       println("\n**************************************************")
       //query for fastest growing states(top 10)
-        //databaseManager class > queries method > case Q4_2 calls DataAnalysis class > State_Deff method
       databaseManager.queries(queryNumber="Q4_2")
       databaseManager.pause(1000)
       Q4()
       case "3" =>
       println("\n**************************************************")
       //query for areas of decreasing population either state wise or region wise(top 10 or 3 respectively)
-        //databaseManager class > queries method > case Q4_3 calls DataAnalysis class > decr_pops method
       databaseManager.queries(queryNumber="Q4_3")
       databaseManager.pause(1000)
       Q4()
