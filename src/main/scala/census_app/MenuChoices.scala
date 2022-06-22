@@ -16,7 +16,7 @@ object MenuChoices {
     println("\n----Welcome to the Census Bureau Analysis----\n" +
       "[1] Login with an Existing Account\n" +
       "[2] Create a New User Account\n" +
-      "[3] Temporary Bypass to Main Menu\n" +
+     // "[3] Temporary Bypass to Main Menu\n" +
       "[0] Exit\n" +
       "---------------------------------------------\n")
     println("Please select from one of the following options: ")
@@ -26,8 +26,8 @@ object MenuChoices {
         login.login
       case "2" =>
         login.create
-      case "3" =>
-        main_menu()
+      //case "3" =>
+      //  main_menu()
       case "0" =>
         println("Thank you for using the application!")
         sys.exit()
