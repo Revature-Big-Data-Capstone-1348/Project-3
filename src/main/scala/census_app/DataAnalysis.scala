@@ -209,11 +209,11 @@ class DataAnalysis {
     val alPop10 = spark.sql("Select State_pop FROM 2010_data WHERE State_Name = '" + state_in.toUpperCase()+"'")
     val alPop20 = spark.sql("Select State_pop FROM 2020_data WHERE State_Name = '" + state_in.toUpperCase()+"'")
 
-    rintln("2000")
+    println("2000")
     alPop00.show()
-    rintln("2010")
+    println("2010")
     alPop10.show()
-    rintln("2020")
+    println("2020")
     alPop20.show()
   }
 
@@ -222,11 +222,11 @@ class DataAnalysis {
     val TotalPop10 = spark.sql("select sum(State_pop) as total_population_2010 from 2010_data")
     val TotalPop20 = spark.sql("select sum(State_pop) as total_population_2020 from 2020_data")
 
-    rintln("2000")
+    println("2000")
     TotalPop00.show()
-    rintln("2010")
+    println("2010")
     TotalPop10.show()
-    rintln("2020")
+    println("2020")
     TotalPop20.show()
   }
 }
