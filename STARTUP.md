@@ -37,12 +37,12 @@ Here you will find everything you need to get started with this application.
 - Access Shell (provided at https://www.census.gov/programs-surveys/decennial-census/about/rdo/summary-files.2020.html)
 
 ## Setup: Application Envrionment 
-#### Within IntteliJ ensure
+#### Within IntelliJ ensure
   - Scala plugins are installed
 #### After plugins:
 - Begin a new project with Scala 
   - Ensure sbt build
-  - Ensure JDK
+  - Ensure JDK 1.8
   - Ensure Maven repositories are accurate
 - Build src folder
 - Create new directories, classes, and objects as necessary
