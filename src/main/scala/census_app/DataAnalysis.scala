@@ -69,8 +69,8 @@ class DataAnalysis {
   def Race_Pops(spark:SparkSession): Unit = {
     var year = 2000
     while(year < 2029) {
-      val Race00 = spark.sql("Select sum(WO),sum(BO),sum(AIO),sum(AO),sum(NHO),sum(SOR),sum(HL) from " + year + "_data")
-      .toDF("white", "black_or_african_american","american_indian", "asian", "native_hawaiian","other","hispanic_or_latino")
+      val Race00 = spark.sql("Select sum(WO), sum(BO),sum(AIO),sum(AO),sum(NHO),sum(SOR),sum(HL) from " + year + "_data")
+        .toDF("white", "black_or_african_american","american_indian", "asian", "native_hawaiian","other","hispanic_or_latino")
       println(year)
       Race00.show()
       year = year + 10
@@ -183,12 +183,10 @@ class DataAnalysis {
   def state_predict_2020(spark: SparkSession): Unit = {
     print("Please enter state abbreviation of choice: ")
     val state_in = scala.io.StdIn.readLine()
-    val AlPop00 = spark.sql("Select State_pop FROM 2000_data WHERE State_Name = '" + state_in.toUpperCase()+"'")
-    val AlPop10 = spark.sql("Select State_pop FROM 2010_data WHERE State_Name = '" + state_in.toUpperCase()+"'")
+    val AlPop00 = spark.sql("Select State_pop as state_pop_2000 FROM 2000_data WHERE State_Name = '" + state_in.toUpperCase()+"'")
+    val AlPop10 = spark.sql("Select State_pop as state_pop_2010 FROM 2010_data WHERE State_Name = '" + state_in.toUpperCase()+"'")
 
-    println("2000")
     AlPop00.show()
-    println("2010")
     AlPop10.show()
   }
 
@@ -196,24 +194,19 @@ class DataAnalysis {
     val TotalPop00 = spark.sql("select sum(State_pop) as total_population_2000 from 2000_data")
     val TotalPop10 = spark.sql("select sum(State_pop) as total_population_2010 from 2010_data")
 
-    println("2000")
     TotalPop00.show()
-    println("2010")
     TotalPop10.show()
   }
 
   def state_future(spark:SparkSession): Unit = {
     print("Please enter state abbreviation of choice: ")
     val state_in = scala.io.StdIn.readLine()
-    val alPop00 = spark.sql("Select State_pop FROM 2000_data WHERE State_Name = '" + state_in.toUpperCase()+"'")
-    val alPop10 = spark.sql("Select State_pop FROM 2010_data WHERE State_Name = '" + state_in.toUpperCase()+"'")
-    val alPop20 = spark.sql("Select State_pop FROM 2020_data WHERE State_Name = '" + state_in.toUpperCase()+"'")
+    val alPop00 = spark.sql("Select State_pop as state_pop_2000 FROM 2000_data WHERE State_Name = '" + state_in.toUpperCase()+"'")
+    val alPop10 = spark.sql("Select State_pop as state_pop_2010 FROM 2010_data WHERE State_Name = '" + state_in.toUpperCase()+"'")
+    val alPop20 = spark.sql("Select State_pop as state_pop_2020 FROM 2020_data WHERE State_Name = '" + state_in.toUpperCase()+"'")
 
-    println("2000")
     alPop00.show()
-    println("2010")
     alPop10.show()
-    println("2020")
     alPop20.show()
   }
 
@@ -222,11 +215,8 @@ class DataAnalysis {
     val TotalPop10 = spark.sql("select sum(State_pop) as total_population_2010 from 2010_data")
     val TotalPop20 = spark.sql("select sum(State_pop) as total_population_2020 from 2020_data")
 
-    println("2000")
     TotalPop00.show()
-    println("2010")
     TotalPop10.show()
-    println("2020")
     TotalPop20.show()
   }
 }

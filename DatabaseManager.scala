@@ -16,6 +16,7 @@ class DatabaseManager {
     .config ("spark.master", "local[4]")
     .getOrCreate()
 
+  //create a function that will create DataFrames from the data contained within the 2000, 2010, and 2020 census data CSVs
   def LoadTables(): Unit = {
     val df2020: DataFrame = spark.read.format("csv")
       .option("header","false")
@@ -50,7 +51,7 @@ class DatabaseManager {
     spark.close
   }
 
-  //queries for the data analysis questions
+  //queries for the data analysis questions are each mapped to a case that will run each query dependent on user input within the running app
   def queries(queryNumber: String): Unit = queryNumber match {
     case "Q1_1" => dataAnalysis.Total_Pops(spark:SparkSession)
     case "Q1_2" => dataAnalysis.Region_Pops(spark:SparkSession)

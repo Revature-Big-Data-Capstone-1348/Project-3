@@ -8,11 +8,12 @@ import scala.collection.JavaConversions._
 
 object MenuChoices {
 
+  //two vals to create instances from the DBManager class and Login class that will be utilized within each menu
   val databaseManager = new DatabaseManager()
   val login = new Login()
 
+  //function to call the login menu with options to login with existing credentials or create a new one
   def login_menu(): Unit = {
-    //val loginmain = new loginmain(spark)
     println("\n----Welcome to the Census Bureau Analysis----\n" +
       "[1] Login with an Existing Account\n" +
       "[2] Create a New User Account\n" +
@@ -37,6 +38,7 @@ object MenuChoices {
     }
   }
 
+  //function that calls the main menu with options for each scenario upon a successful check for username/password credentials
   def main_menu(): Unit = {
     println("\n----------------Main Menu-------------------\n" +
       "[1] Scenario One: Total Population\n" +
@@ -68,6 +70,9 @@ object MenuChoices {
         main_menu()
     }
   }
+
+  //scenario one menu to run the queries for total population, region with the highest population, and/or display
+  //different race/ethnicities for 2000, 2010, and 2020, respectively.
   def Q1(): Unit = {
     println("\n-------------Scenario One Menu---------------\n" +
       "[1] Display total population of the country\n" +
@@ -104,6 +109,7 @@ object MenuChoices {
     }
   }
 
+  //scenario two menu to run queries pertaining to populations trends
   def Q2(): Unit = {
     println("\n-------------Scenario Two Menu---------------\n" +
       "[1] Display population trend line for country\n" +
@@ -133,6 +139,7 @@ object MenuChoices {
     }
   }
 
+  //scenario three menu with options for future analysis queries
   def Q3(): Unit = {
     println("\n------------Future Analysis Menu--------------\n" +
       "[1] Display population trend line for country\n" +
@@ -150,9 +157,6 @@ object MenuChoices {
         Q3()
       case "2" =>
         println("\n**************************************************")
-//        print("Please enter state of choice: ")
-//        val state_in = scala.io.StdIn.readLine()
-        //query for trend line of population changes for state of choice
         databaseManager.queries(queryNumber = "Q3_2")
         databaseManager.pause(1000)
         Q3()
@@ -164,6 +168,8 @@ object MenuChoices {
     }
   }
 
+  //scenario 4 menu which contains queries for population comparisons related to fastest growing regions and/or states,
+  //as well as areas where population has decreased
   def Q4(): Unit = {
     println("\n-------Population Comparison Menu-----------\n" +
       "[1] Display the fastest growing regions\n" +

@@ -9,18 +9,22 @@ import org.apache.spark.sql.SparkSession
 
 
 object Main {
+
   //turn off log messages
   Logger.getLogger("org").setLevel(Level.OFF)
   Logger.getLogger("akka").setLevel(Level.OFF)
 
+  //create an instance of DatabaseManager that will be used in the Init function
   val databaseManager = new DatabaseManager()
 
+  //a function that will create the necessary DFs for the queries when called once the app is started
   def Init(): Unit ={
     databaseManager.LoadTables()
   }
 
+  //runs the entire application by loading the DFs and calling the login menu
   def main(args: Array[String]): Unit = {
     Init()
-    MenuChoices.login_menu(                                                )
+    MenuChoices.login_menu()
   }
 }
